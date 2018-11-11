@@ -1,6 +1,6 @@
 import org.w3c.dom.HTMLDivElement
 import kotlin.browser.document
-import kotlin.browser.window
+import kotlin.js.Json
 import kotlin.js.json
 
 fun main(args: Array<String>) {
@@ -8,8 +8,6 @@ fun main(args: Array<String>) {
     val div = document.getElementById("my_div") as HTMLDivElement
 
     val jsonFileUrl = "https://www.lottiefiles.com/storage/datafiles/zc3XRzudyWE36ZBJr7PIkkqq0PFIrIBgp4ojqShI/newAnimation.json"
-
-    val lottie = window.asDynamic().lottie
 
     val animData = json(
             Pair("container", div),
@@ -20,4 +18,10 @@ fun main(args: Array<String>) {
     )
 
     lottie.loadAnimation(animData)
+}
+
+external val lottie: Lottie
+
+abstract external class Lottie {
+    fun loadAnimation(animData: Json)
 }
